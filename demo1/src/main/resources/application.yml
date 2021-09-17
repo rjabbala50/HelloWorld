@@ -1,0 +1,4 @@
+NotificationService:
+    bar: bar
+    foo: foo
+    notification: 'Hey, its me from YAML properties '
