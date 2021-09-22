@@ -17,6 +17,12 @@ public class DatabaseLoader {
 		this.questionRepository = questionRepository;
 	}
 	
+	public ConnectQuestionBank addQuestion(ConnectQuestionBank connectQuestionBank) {
+	
+		questionRepository.save(connectQuestionBank) ;
+		return connectQuestionBank ;
+	}
+	
 	@PostConstruct
 	private void initDatabase () {
 		questionRepository.deleteAll();
