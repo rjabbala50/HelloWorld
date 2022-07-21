@@ -5,9 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class H2DatabaseApplicationTests {
-	
+	//</editor-fold>
 	@Test
 	void contextLoads() {
 	}
-	
 }

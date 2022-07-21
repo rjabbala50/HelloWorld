@@ -1,45 +1,72 @@
 package com.example.h2database.controller;
 
-import com.example.h2database.ConnectQuestionBank;
-import com.example.h2database.DatabaseLoader;
+import com.example.h2database.service.bulkWriteThemes;
+import com.example.h2database.documents.ConnectQuestionBank;
+import com.example.h2database.service.DatabaseLoader;
 import com.example.h2database.service.DatabaseReader;
-import com.example.h2database.service.ThemeCollection;
+import com.example.h2database.documents.ThemeCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import com.example.h2database.service.bulkWriteThemes;
+
 
 @RestController
 public class PageController {
 	
 	@Autowired
-	DatabaseReader databaseReader ;
+	private DatabaseReader databaseReader ;
 	
 	@Autowired
-	DatabaseLoader databaseLoader ;
+	private DatabaseLoader databaseLoader;
 	
-	@Secured({"ROLE_USER"})
-	@RequestMapping("/")
+	@Autowired
+	protected bulkWriteThemes bulkWriteThemes ;
+	
+	//@Secured(value = {"ROLE_USER"})
+	@RequestMapping(value = "/")
 	public String getDocuments() {
-		return "Welcome to Employee Connections" ;
+		return "Welcome to Employee Connections";
 	}
 	
-	@Secured({"ROLE_ADMIN"})
-	@GetMapping("/themes/")
-	public List<ThemeCollection> readThemes() {
+	//@Secured(value = {"ROLE_ADMIN","ROLE_USER"})
+	@GetMapping(value = "/themes")
+	public List<ThemeCollection> readThemes()  {
+	System.out.println("Inside readThemes") ;
+		databaseLoader.initDatabase() ;
 		return databaseReader.getAllThemes();
 	}
 	
-	@Secured({"ROLE_ADMIN"})
-	@GetMapping("/themes/collections")
+	//@Secured(value = {"ROLE_ADMIN","ROLE_USER"})
+	@GetMapping(value = "/themes/collections")
 	public List<ConnectQuestionBank> readCollection() {
-		return databaseReader.getAllDocuments() ;
+		databaseLoader.initDatabase() ;
+		return databaseReader.getAllDocuments();
 	}
 	
-	@Secured({"ROLE_ADMIN"})
-	//@SetMapping(value="/add")
-	@RequestMapping (value="/add")
+	@GetMapping(value="/themes/bulk")
+	//public List<ThemeCollection> insertBulk() {
+	public Long insertBulk() {
+		
+		bulkWriteThemes.insertBulkThemes() ;
+		//return databaseReader.getAllThemes() ;
+		return databaseReader.getDocumentCountFromCollection();
+	}
+	
+	
+	//@Secured(value = {"ROLE_ADMIN","ROLE_USER"})
+	//@RequestMapping (value="/add")
+	@PostMapping(value = "value=/add")
 	public void insertData() {
 		databaseLoader.initDatabase();
 	}
+	
+	
+	
+	/*
+	@RequestMapping(value = "/error")
+	public String displayErrorPage ()  {
+		return "Oooooops sorry Page not found" ;
+	}
+	*/
 }

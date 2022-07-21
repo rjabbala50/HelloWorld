@@ -1,15 +1,15 @@
-package com.example.h2database.service;
+package com.example.h2database.documents;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigInteger;
+//import javax.persistence.Entity;
 
-@Document
+@Document ("Themes")
 public class ThemeCollection {
 	
 	@Id
-	private BigInteger id ;
+	private String id ;
 	
 	private Integer themeId ;
 	private String themeName ;
@@ -18,17 +18,22 @@ public class ThemeCollection {
 	public ThemeCollection() {
 	}
 	
-	public ThemeCollection(BigInteger id, Integer themeId, String themeName) {
+	public ThemeCollection(String id, Integer themeId, String themeName) {
 		this.id = id;
 		this.themeId = themeId;
 		this.themeName = themeName;
 	}
 	
-	public BigInteger getId() {
+	public ThemeCollection(Integer themeId, String themeName) {
+		this.themeId = themeId;
+		this.themeName = themeName;
+	}
+	
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

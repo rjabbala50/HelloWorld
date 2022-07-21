@@ -1,9 +1,13 @@
-package com.example.h2database;
+package com.example.h2database.service;
 
-import com.example.h2database.service.ThemeCollection;
-import com.example.h2database.service.ThemeRepository;
+import com.example.h2database.documents.ConnectQuestionBank;
+import com.example.h2database.repository.QuestionRepository;
+import com.example.h2database.documents.ThemeCollection;
+import com.example.h2database.repository.ThemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import com.example.h2database.documents.ConnectQuestionBank.AnswerData ;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -18,6 +22,7 @@ public class DatabaseLoader {
 	private final ThemeRepository themeRepository;
 	
 	
+	
 	@Autowired
 	public DatabaseLoader(QuestionRepository questionRepository, ThemeRepository themeRepository) {
 		this.questionRepository = questionRepository;
@@ -25,7 +30,7 @@ public class DatabaseLoader {
 	}
 	
 	
-	@PostConstruct
+	//@PostConstruct
 	public void initDatabase () {
 		insertQuestions();
 		insertThemes();

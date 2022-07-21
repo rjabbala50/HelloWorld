@@ -1,22 +1,18 @@
-package com.example.h2database;
+package com.example.h2database.documents;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.math.BigInteger;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
-
-@Document
-public class ConnectQuestionBank {
+@Document("Questions")
+public class ConnectQuestionBank             {
 	
 	@Id
-	private BigInteger id ;
+	private String id ;
+	
 	private Integer questionId ;
 	private String question ;
-	List <AnswerData> answerList ;
+	private List <AnswerData> answerList ;
 	private Integer themeId ;
 	
 	/* Json structure for Answer to this question
@@ -28,8 +24,9 @@ public class ConnectQuestionBank {
 		    ]
 	 */
 	//Option-1 to take these Collections but I favour
-	//List<Map<BigInteger,String >> answer ;
-	static class AnswerData {
+	//List<Map<Long,String >> answer ;
+	
+	public static class AnswerData {
 		private Integer ansId ;
 		private String answer ;
 		
@@ -61,11 +58,11 @@ public class ConnectQuestionBank {
 		
 	} //AnswerData
 	
-	public BigInteger getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

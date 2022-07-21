@@ -1,18 +1,10 @@
 
-
-
-
-
 public class MongoStorageLayer {
 final String APP_ID = "connectdevapp-inzuj" ;
 final String  ATLAS_SERVICE = "mongodb-atlas" ;
 final String app = new Realm.App({id: APP_ID});
 
-
 }
-
-
-
 
 
 // Function executed by the LOGIN button.
